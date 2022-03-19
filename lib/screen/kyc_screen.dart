@@ -54,7 +54,7 @@ class _KYCScreenState extends State<KYCScreen> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: firebase.users
-            .where('kycVerified', isEqualTo: false)
+            .where('kycStatus', isEqualTo: 'รอตรวจสอบ')
             .orderBy('kycCreated', descending: false)
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
