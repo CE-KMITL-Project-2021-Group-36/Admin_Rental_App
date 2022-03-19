@@ -7,26 +7,35 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0-268.18.beta <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+
+  firebase_core: ^1.13.1
+  cloud_firestore: ^3.1.10
+  firebase_storage: ^10.2.9
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 flutter:
   uses-material-design: true
 
-  # Enable generation of localized Strings from arb files.
-  generate: true
-
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: SFThonburi
+      fonts:
+        - asset: assets/fonts/SFThonburi-Regular.ttf
+        - asset: assets/fonts/SFThonburi-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/SFThonburi-Semibold.ttf
+          weight: 600
