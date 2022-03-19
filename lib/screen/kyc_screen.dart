@@ -53,10 +53,13 @@ class _KYCScreenState extends State<KYCScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: firebase.users.orderBy('kycCreated').snapshots(),
+        stream: firebase.users
+            .where('kycVerified', isEqualTo: false)
+            .orderBy('kycCreated', descending: false)
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return const Text('มีบางอย่างผิดพลาด');
+            return const Center(child: Text('มีบางอย่างผิดพลาด'));
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

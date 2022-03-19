@@ -13,6 +13,19 @@ class KYCDetail extends StatefulWidget {
 class _KYCDetailState extends State<KYCDetail> {
   final FirebaseServices firebase = FirebaseServices();
 
+  Future<void> approveKYC() {
+    return firebase.users.doc(widget.uid).update({
+      'kycVerified': true,
+      'kycStatus': 'ยืนยันตัวตนแล้ว',
+    }).then((value) => Navigator.of(context).pop());
+  }
+
+  Future<void> rejectKYC() {
+    return firebase.users.doc(widget.uid).update({
+      'kycStatus': 'โปรดยืนยันตัวตนอีกครั้ง',
+    }).then((value) => Navigator.of(context).pop());
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
@@ -73,7 +86,7 @@ class _KYCDetailState extends State<KYCDetail> {
                         Row(
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: rejectKYC,
                               child: const Text('ปฏิเสธ'),
                               style: TextButton.styleFrom(
                                   primary: Colors.white,
@@ -87,7 +100,7 @@ class _KYCDetailState extends State<KYCDetail> {
                               width: 25,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: approveKYC,
                               child: const Text('ยืนยัน'),
                               style: TextButton.styleFrom(
                                   primary: Colors.white,
