@@ -1,5 +1,9 @@
+import 'package:admin_rental_app/config/palette.dart';
+import 'package:admin_rental_app/screen/kyc_detail.dart';
+import 'package:admin_rental_app/services/firebase_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class KYCScreen extends StatefulWidget {
   const KYCScreen({Key? key}) : super(key: key);
@@ -9,8 +13,7 @@ class KYCScreen extends StatefulWidget {
 }
 
 class _KYCScreenState extends State<KYCScreen> {
-  final _fireStore = FirebaseFirestore.instance;
-
+  final FirebaseServices firebase = FirebaseServices();
   // Future<void> getData() async {
   //   // Get docs from collection reference
   //   QuerySnapshot querySnapshot = await _fireStore.collection('kyc').get();
@@ -49,6 +52,67 @@ class _KYCScreenState extends State<KYCScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: firebase.users.orderBy('kycCreated').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('มีบางอย่างผิดพลาด');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Padding(
+            padding: const EdgeInsets.all(20),
+            child: ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data =
+                    document.data()! as Map<String, dynamic>;
+                DateTime dt = (data['kycCreated'] as Timestamp).toDate();
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    width: 500,
+                    height: 100,
+                    child: Card(
+                      color: primaryLightColor,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ListTile(
+                          dense: false,
+                          leading: const Icon(
+                            Icons.account_circle_rounded,
+                            size: 60,
+                          ),
+                          title:
+                              Text(data['firstName'] + ' ' + data['lastName']),
+                          subtitle: Text(
+                            DateFormat('dd/MM/yyyy   HH:mm').format(dt),
+                          ),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return KYCDetail(
+                                    uid: document.id,
+                                  );
+                                });
+                          },
+                          // subtitle: Text(data['company']),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          );
+        });
+
     // return Container(
     //   child: ListView.builder(
     //       itemCount: itemsList!.length,
@@ -62,19 +126,20 @@ class _KYCScreenState extends State<KYCScreen> {
     //       }),
     //   // child: Text(allData![0].toString()),
     // );
-    return ListView(
-      children: const [
-        Card(
-          child: ListTile(
-            title: Text('ชื่อ นามสกุล'),
-            subtitle: Text('Timestamp'),
-            leading: Icon(
-              Icons.account_circle_rounded,
-              size: 50,
-            ),
-          ),
-        )
-      ],
-    );
+
+    // return ListView(
+    //   children: const [
+    //     Card(
+    //       child: ListTile(
+    //         title: Text('ชื่อ นามสกุล'),
+    //         subtitle: Text('Timestamp'),
+    //         leading: Icon(
+    //           Icons.account_circle_rounded,
+    //           size: 50,
+    //         ),
+    //       ),
+    //     )
+    //   ],
+    // );
   }
 }

@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int position = 0;
+  int position = 1;
   final pages = [
     const DashBoardScreen(),
     const KYCScreen(),
