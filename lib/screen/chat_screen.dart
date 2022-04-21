@@ -5,8 +5,27 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('แชทกับผู้ใช้'),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Supporter Chat'),
+              Row(
+                children: [
+                  Text('chatlist'),
+                  Expanded(child: Text('chat'),),
+                  Text('detail'),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
+
+  
 }
