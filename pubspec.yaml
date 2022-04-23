@@ -2,7 +2,7 @@ name: admin_rental_app
 description: A new Flutter project.
 
 # Prevent accidental publishing to pub.dev.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -28,10 +28,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    # Add assets from the images directory to the application.
-    - assets/images/
 
   fonts:
     - family: SFThonburi
