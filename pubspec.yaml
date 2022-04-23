@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.17.0
   firebase_auth: ^3.3.15
   image_picker: ^0.8.5
+  url_launcher: ^6.1.0
 
 dev_dependencies:
   flutter_test:

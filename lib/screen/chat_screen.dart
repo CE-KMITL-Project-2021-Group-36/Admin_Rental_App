@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -21,11 +22,17 @@ class _ChatScreenState extends State<ChatScreen> {
   bool isSelected = false;
   String currentUserId = 'admin';
 
-  @override
-  initState() {
-    super.initState();
-
-    //getData();
+  void launchEmailSubmission(userEmail) async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: userEmail,
+    );
+    String url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      debugPrint('Could not launch $url');
+    }
   }
 
   getData() async {
@@ -230,7 +237,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _userData('เลขบัตรประจำตัวประชาชน', userData['idCardNumber']),
+                    _userData(
+                        'เลขบัตรประจำตัวประชาชน', userData['idCardNumber']),
                     _userData('ชื่อจริง', userData['firstName']),
                     _userData('นามสกุล', userData['lastName']),
                     _userData('อีเมล', userData['email']),
@@ -243,7 +251,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 SizedBox(
                   width: 160,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      launchEmailSubmission(userData['email']);
+                    },
                     child: Row(
                       children: const [
                         Icon(Icons.email),
@@ -356,7 +366,7 @@ class _ChatScreenState extends State<ChatScreen> {
     lastestMessage =
         isMylastestMessage ? 'คุณ: $lastestMessage' : lastestMessage;
     return TextButton(
-      onPressed: () {        
+      onPressed: () {
         this.chatId = chatId;
         this.chatWithUserId = chatWithUserId;
         this.chatWithUserName = chatWithUserName;
