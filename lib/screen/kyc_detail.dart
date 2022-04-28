@@ -15,14 +15,14 @@ class _KYCDetailState extends State<KYCDetail> {
 
   Future<void> approveKYC() {
     return firebase.users.doc(widget.uid).update({
-      'kycVerified': true,
-      'kycStatus': 'ยืนยันตัวตนแล้ว',
+      'kyc.verified': true,
+      'kyc.status': 'ยืนยันตัวตนแล้ว',
     }).then((value) => Navigator.of(context).pop());
   }
 
   Future<void> rejectKYC() {
     return firebase.users.doc(widget.uid).update({
-      'kycStatus': 'โปรดยืนยันตัวตนอีกครั้ง',
+      'kyc.status': 'โปรดยืนยันตัวตนอีกครั้ง',
     }).then((value) => Navigator.of(context).pop());
   }
 
@@ -52,11 +52,11 @@ class _KYCDetailState extends State<KYCDetail> {
                     Column(
                       children: [
                         Image.network(
-                          data['frontPhoto'],
+                          data['kyc']['frontPhoto'],
                           width: 300,
                         ),
                         Image.network(
-                          data['selfiePhoto'],
+                          data['kyc']['selfiePhoto'],
                           width: 300,
                         ),
                       ],

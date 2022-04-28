@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   children: [
                     DrawerHeader(
-                      child: Image.network(
-                          'https://cdn.dribbble.com/users/3547568/screenshots/16465015/r_app_icon_4x.jpg'),
+                      child: Image.asset('assets/images/appicon.png'),
                     ),
                     DrawerListTile(
                       title: "หน้าแรก",
