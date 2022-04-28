@@ -54,8 +54,8 @@ class _KYCScreenState extends State<KYCScreen> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: firebase.users
-            .where('kycStatus', isEqualTo: 'รอตรวจสอบ')
-            .orderBy('kycCreated', descending: false)
+            .where('kyc.status', isEqualTo: 'รอตรวจสอบ')
+            .orderBy('kyc.created', descending: false)
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -70,7 +70,7 @@ class _KYCScreenState extends State<KYCScreen> {
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                DateTime dt = (data['kycCreated'] as Timestamp).toDate();
+                DateTime dt = (data['kyc']['created'] as Timestamp).toDate();
                 return Align(
                   alignment: Alignment.topLeft,
                   child: SizedBox(
@@ -97,6 +97,7 @@ class _KYCScreenState extends State<KYCScreen> {
                             DateFormat('dd/MM/yyyy   HH:mm').format(dt),
                           ),
                           onTap: () {
+                            debugPrint(document.id);
                             showDialog(
                                 context: context,
                                 builder: (context) {
