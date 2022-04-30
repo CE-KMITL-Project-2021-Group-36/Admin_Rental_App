@@ -1,4 +1,5 @@
 import 'package:admin_rental_app/config/palette.dart';
+import 'package:admin_rental_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _continuousValidation = false;
+  String _messageToDisplay = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'assets/images/appicon.png',
                         height: 150,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Form(
@@ -96,10 +98,54 @@ class _LoginScreenState extends State<LoginScreen> {
                                       _continuousValidation = true;
                                     });
                                   } else {
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: _email.text,
-                                            password: _password.text);
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => const Center(
+                                            child:
+                                                CircularProgressIndicator()));
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
+                                              email: _email.text,
+                                              password: _password.text);
+                                    } on FirebaseAuthException catch (e) {
+                                      switch (e.code) {
+                                        case 'invalid-email':
+                                          _messageToDisplay = 'อีเมลไม่ถูกต้อง';
+                                          break;
+                                        case 'user-disabled':
+                                          _messageToDisplay =
+                                              'บัญชีถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ';
+                                          break;
+                                        case 'user-not-found':
+                                          _messageToDisplay =
+                                              'ไม่พบบัญชีผู้ใช้งาน';
+                                          break;
+                                        case 'wrong-password':
+                                          _messageToDisplay =
+                                              'รหัสผ่านไม่ถูกต้อง';
+                                          break;
+                                        default:
+                                          _messageToDisplay = 'ไม่ทราบสาเหตุ';
+                                          break;
+                                      }
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: const Text('เกิดข้อผิดพลาด'),
+                                          content: Text(_messageToDisplay),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text("ตกลง"))
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                    navigatorKey.currentState!
+                                        .popUntil((route) => route.isFirst);
                                   }
                                 },
                                 child: const Text(
