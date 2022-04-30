@@ -50,10 +50,24 @@ class _KYCDetailState extends State<KYCDetail> {
                 child: Row(
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        const Text(
+                          'รูปบัตรประชาชนด้านหน้า',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
                         Image.network(
                           data['kyc']['frontPhoto'],
                           width: 300,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          'รูปถ่ายคู่กับบัตรประชาชน',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Image.network(
                           data['kyc']['selfiePhoto'],
@@ -84,6 +98,7 @@ class _KYCDetailState extends State<KYCDetail> {
                           ),
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextButton(
                               onPressed: rejectKYC,

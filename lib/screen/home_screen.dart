@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Row(
             children: [
-              Text(
+              const Text(
                 'ผู้ดูแลระบบ   ',
                 style: TextStyle(color: surfaceColor, fontSize: 18),
               ),
@@ -43,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: surfaceColor,
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
             ],
