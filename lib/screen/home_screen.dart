@@ -1,3 +1,4 @@
+import 'package:admin_rental_app/config/palette.dart';
 import 'package:admin_rental_app/screen/chat_screen.dart';
 import 'package:admin_rental_app/screen/dashboard_screen.dart';
 import 'package:admin_rental_app/screen/drawer_list_tile.dart';
@@ -5,6 +6,7 @@ import 'package:admin_rental_app/screen/kyc_screen.dart';
 import 'package:admin_rental_app/screen/report_screen.dart';
 import 'package:admin_rental_app/screen/user_management_screen.dart';
 import 'package:admin_rental_app/screen/withdrawal_request_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,6 +30,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        actions: [
+          Row(
+            children: [
+              Text(
+                'ผู้ดูแลระบบ   ',
+                style: TextStyle(color: surfaceColor, fontSize: 18),
+              ),
+              IconButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  icon: Icon(
+                    Icons.logout,
+                    color: surfaceColor,
+                  )),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          )
+        ],
+      ),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

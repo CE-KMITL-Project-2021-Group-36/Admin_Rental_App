@@ -14,41 +14,6 @@ class KYCScreen extends StatefulWidget {
 
 class _KYCScreenState extends State<KYCScreen> {
   final FirebaseServices firebase = FirebaseServices();
-  // Future<void> getData() async {
-  //   // Get docs from collection reference
-  //   QuerySnapshot querySnapshot = await _fireStore.collection('kyc').get();
-  //
-  //   // Get data from docs and convert map to List
-  //   allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-  //   //for a specific field
-  //   // final allData = querySnapshot.docs.map((doc) => doc.get('uid')).toList();
-  //
-  //   // print(allData);
-  // }
-
-  // @override
-  // void initState() {
-  //   // getData();
-  //   getKYCList();
-  //   super.initState();
-  // }
-  //
-  // final CollectionReference kyc = FirebaseFirestore.instance.collection('kyc');
-  // List itemsList = [];
-  //
-  // Future getKYCList() async {
-  //   try {
-  //     await kyc.get().then((querySnapshot) {
-  //       for (var element in querySnapshot.docs) {
-  //         itemsList.add(element.data);
-  //       }
-  //     });
-  //     return itemsList;
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
