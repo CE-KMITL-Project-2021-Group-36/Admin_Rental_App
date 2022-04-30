@@ -57,9 +57,12 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 32.0),
-                  child: Text('Supporter Chat'),
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 32.0),
+                //   child: Text('Supporter Chat'),
+                // ),
+                SizedBox(
+                  height: 10,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 8.0),
                               child: Text(
-                                'ข้อความ',
+                                'กล่องข้อความ',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

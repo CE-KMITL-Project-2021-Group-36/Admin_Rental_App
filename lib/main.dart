@@ -1,5 +1,7 @@
 import 'package:admin_rental_app/config/theme.dart';
 import 'package:admin_rental_app/screen/home_screen.dart';
+import 'package:admin_rental_app/screen/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -18,16 +20,39 @@ void main() async {
   // runApp(const ProviderScope(child: MyApp()));
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Rental App Admin',
       theme: theme(),
-      home: const HomeScreen(),
+      home: const AuthChecker(),
+    );
+  }
+}
+
+class AuthChecker extends StatelessWidget {
+  const AuthChecker({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          } else {
+            return const LoginScreen();
+          }
+        },
+      ),
     );
   }
 }
