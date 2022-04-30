@@ -1,5 +1,6 @@
 import 'package:admin_rental_app/services/firebase_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 
 class KYCDetail extends StatefulWidget {
@@ -57,9 +58,19 @@ class _KYCDetailState extends State<KYCDetail> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Image.network(
-                          data['kyc']['frontPhoto'],
-                          width: 300,
+                        InkWell(
+                          onTap: () {
+                            final imageProvider =
+                                Image.network(data['kyc']['frontPhoto']).image;
+                            showImageViewer(
+                              context,
+                              imageProvider,
+                            );
+                          },
+                          child: Image.network(
+                            data['kyc']['frontPhoto'],
+                            width: 300,
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -69,9 +80,19 @@ class _KYCDetailState extends State<KYCDetail> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Image.network(
-                          data['kyc']['selfiePhoto'],
-                          width: 300,
+                        InkWell(
+                          onTap: () {
+                            final imageProvider =
+                                Image.network(data['kyc']['selfiePhoto']).image;
+                            showImageViewer(
+                              context,
+                              imageProvider,
+                            );
+                          },
+                          child: Image.network(
+                            data['kyc']['selfiePhoto'],
+                            width: 300,
+                          ),
                         ),
                       ],
                     ),
