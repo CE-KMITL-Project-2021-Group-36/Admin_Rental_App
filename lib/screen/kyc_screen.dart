@@ -1,5 +1,5 @@
 import 'package:admin_rental_app/config/palette.dart';
-import 'package:admin_rental_app/screen/kyc_detail.dart';
+import 'package:admin_rental_app/screen/kyc_detail_screen.dart';
 import 'package:admin_rental_app/services/firebase_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class _KYCScreenState extends State<KYCScreen> {
                           title:
                               Text(data['firstName'] + ' ' + data['lastName']),
                           subtitle: Text(
-                            DateFormat('dd/MM/yyyy   HH:mm').format(dt),
+                            DateFormat('dd-MM-yyyy   HH:mm').format(dt),
                           ),
                           onTap: () {
                             debugPrint(document.id);
