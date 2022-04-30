@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -28,8 +28,8 @@ class _ChatScreenState extends State<ChatScreen> {
       path: userEmail,
     );
     String url = params.toString();
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
     } else {
       debugPrint('Could not launch $url');
     }
@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 //   padding: EdgeInsets.symmetric(vertical: 32.0),
                 //   child: Text('Supporter Chat'),
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
