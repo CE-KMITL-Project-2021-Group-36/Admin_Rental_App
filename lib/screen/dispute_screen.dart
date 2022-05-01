@@ -53,7 +53,7 @@ class _DisputeScreenState extends State<DisputeScreen> {
                         child: ListTile(
                           dense: false,
                           leading: const Icon(
-                            Icons.account_circle_rounded,
+                            Icons.gavel,
                             size: 60,
                           ),
                           title: Text(data['title']),

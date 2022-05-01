@@ -53,7 +53,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         child: ListTile(
                           dense: false,
                           leading: const Icon(
-                            Icons.account_circle_rounded,
+                            Icons.announcement,
                             size: 60,
                           ),
                           title: Text(data['title']),

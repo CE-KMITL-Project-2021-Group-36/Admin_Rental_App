@@ -6,7 +6,10 @@ class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('หน้าแรก'),
+      child: Text(
+        'ยินดีต้อนรับ',
+        style: TextStyle(fontSize: 30),
+      ),
     );
   }
 }
