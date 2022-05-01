@@ -37,7 +37,7 @@ class _KYCDetailState extends State<KYCDetail> {
           return const Text('มีบางอย่างผิดพลาด');
         }
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return const Text("ไม่พบข้อมูล");
+          return const Text('ไม่พบข้อมูล');
         }
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
