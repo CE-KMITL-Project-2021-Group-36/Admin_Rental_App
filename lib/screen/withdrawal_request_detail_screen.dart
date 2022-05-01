@@ -66,8 +66,8 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
                         TextButton(
                           onPressed: () async {
                             await firebase.users.doc(data['userId']).update({
-                              'wallet.balance':
-                                  FieldValue.increment(data['amount'])
+                              'wallet.balance': FieldValue.increment(
+                                  data['amount'].toDouble())
                             });
                             await firebase.users
                                 .doc(data['userId'])
@@ -85,7 +85,7 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
                                 .collection('wallet_transactions')
                                 .doc(timestamp)
                                 .set({
-                              'amount': data['amount'],
+                              'amount': data['amount'].toDouble(),
                               'timestamp': timestamp,
                               'type': 'คืนเงิน',
                               'status': 'ถอนเงินไม่สำเร็จ'
