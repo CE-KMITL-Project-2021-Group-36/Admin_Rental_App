@@ -7,4 +7,8 @@ class FirebaseServices {
       FirebaseFirestore.instance.collection('withdrawal_requests');
   final CollectionReference reports =
       FirebaseFirestore.instance.collection('reports');
+  final CollectionReference disputes =
+      FirebaseFirestore.instance.collection('disputes');
+  final CollectionReference contracts =
+      FirebaseFirestore.instance.collection('contracts');
 }

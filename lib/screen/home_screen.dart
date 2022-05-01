@@ -1,6 +1,7 @@
 import 'package:admin_rental_app/config/palette.dart';
 import 'package:admin_rental_app/screen/chat_screen.dart';
 import 'package:admin_rental_app/screen/dashboard_screen.dart';
+import 'package:admin_rental_app/screen/dispute_screen.dart';
 import 'package:admin_rental_app/screen/drawer_list_tile.dart';
 import 'package:admin_rental_app/screen/kyc_screen.dart';
 import 'package:admin_rental_app/screen/report_screen.dart';
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const WithdrawalRequestScreen(),
     const ChatScreen(),
     const ReportScreen(),
+    const DisputeScreen(),
   ];
 
   @override
@@ -124,6 +126,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                       selected: position == 5 ? true : false,
+                    ),
+                    DrawerListTile(
+                      title: "จัดการข้อพิพาท",
+                      icon: const Icon(Icons.gavel),
+                      press: () {
+                        setState(() {
+                          position = 6;
+                        });
+                      },
+                      selected: position == 6 ? true : false,
                     ),
                   ],
                 ),
