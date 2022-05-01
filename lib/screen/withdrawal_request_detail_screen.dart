@@ -31,6 +31,7 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
           debugPrint(data['amount'].runtimeType.toString());
+          final String bank = data['bank'] ??= '';
           return Dialog(
             child: Padding(
               padding: const EdgeInsets.all(40),
@@ -46,8 +47,9 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
                     Text(
                       'ชื่อ - นามสกุล: ' +
                           data['fullName'] +
-                          '\nปรเภท: ' +
+                          '\nบัญชี: ' +
                           data['type'] +
+                          bank +
                           '\nเลขที่บัญชี: ' +
                           data['destination'] +
                           '\nจำนวนเงิน: ' +
