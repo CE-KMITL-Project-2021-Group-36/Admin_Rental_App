@@ -30,6 +30,8 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
+          debugPrint(data['amount'].runtimeType.toString());
+          final String bank = data['bank'] ??= '';
           return Dialog(
             child: Padding(
               padding: const EdgeInsets.all(40),
@@ -45,8 +47,9 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
                     Text(
                       'ชื่อ - นามสกุล: ' +
                           data['fullName'] +
-                          '\nปรเภท: ' +
+                          '\nบัญชี: ' +
                           data['type'] +
+                          bank +
                           '\nเลขที่บัญชี: ' +
                           data['destination'] +
                           '\nจำนวนเงิน: ' +
@@ -62,6 +65,31 @@ class _WithdrawalRequestDetailState extends State<WithdrawalRequestDetail> {
                       children: [
                         TextButton(
                           onPressed: () async {
+                            await firebase.users.doc(data['userId']).update({
+                              'wallet.balance': FieldValue.increment(
+                                  data['amount'].toDouble())
+                            });
+                            await firebase.users
+                                .doc(data['userId'])
+                                .collection('wallet_transactions')
+                                .doc(data['walletTransactionId'])
+                                .update({
+                              'status': 'ไม่สำเร็จ',
+                            });
+                            final String timestamp =
+                                (DateTime.now().millisecondsSinceEpoch / 1000)
+                                    .ceil()
+                                    .toString();
+                            await firebase.users
+                                .doc(data['userId'])
+                                .collection('wallet_transactions')
+                                .doc(timestamp)
+                                .set({
+                              'amount': data['amount'].toDouble(),
+                              'timestamp': timestamp,
+                              'type': 'คืนเงิน',
+                              'status': 'ถอนเงินไม่สำเร็จ'
+                            });
                             await firebase.withdrawalRequests
                                 .doc(widget.uid)
                                 .update({
