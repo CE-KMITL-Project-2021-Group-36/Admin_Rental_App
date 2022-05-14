@@ -54,7 +54,7 @@ class _DisputeScreenState extends State<DisputeScreen> {
                           dense: false,
                           leading: const Icon(
                             Icons.gavel,
-                            size: 60,
+                            size: 50,
                           ),
                           title: Text(data['title']),
                           subtitle: Text(
