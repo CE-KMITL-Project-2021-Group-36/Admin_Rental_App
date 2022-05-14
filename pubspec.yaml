@@ -13,20 +13,20 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^1.15.0
-  cloud_firestore: ^3.1.13
-  firebase_storage: ^10.2.14
+  firebase_core: ^1.17.0
+  cloud_firestore: ^3.1.15
+  firebase_storage: ^10.2.16
   intl: ^0.17.0
-  firebase_auth: ^3.3.16
-  image_picker: ^0.8.5
-  url_launcher: ^6.1.0
+  firebase_auth: ^3.3.18
+  image_picker: ^0.8.5+3
+  url_launcher: ^6.1.2
   easy_image_viewer: ^1.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true

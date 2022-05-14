@@ -55,7 +55,7 @@ class _KYCScreenState extends State<KYCScreen> {
                           leading: Image.network(
                             data['avatarUrl'] ??=
                                 'https://firebasestorage.googleapis.com/v0/b/rental-app-dcdbf.appspot.com/o/app_files%2Favatar.png?alt=media&token=0b9a2456-3c04-458b-a319-83f5717c5cd4',
-                            width: 300,
+                            width: 50,
                           ),
                           title:
                               Text(data['firstName'] + ' ' + data['lastName']),

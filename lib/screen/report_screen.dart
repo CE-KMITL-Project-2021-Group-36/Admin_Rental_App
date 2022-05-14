@@ -54,7 +54,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           dense: false,
                           leading: const Icon(
                             Icons.announcement,
-                            size: 60,
+                            size: 50,
                           ),
                           title: Text(data['title']),
                           subtitle: Text(
